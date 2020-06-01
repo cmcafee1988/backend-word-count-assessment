@@ -28,27 +28,43 @@ should return a dictionary with words as keys, and their counts as values.
 __author__ = "???"
 
 import sys
-
+import re
 
 def create_word_dict(filename):
-    """Returns a word/count dict for the given file."""
-    # Your code here
-    return
-
+    """
+    Returns a word_count dict for the given file.
+    """
+    word_dict={}
+    with open(filename) as f:
+        for line in f:
+            words = line.split()
+            for word in words:
+                temp = word.lower()
+                if temp in word_dict:
+                    word_dict[temp] += 1
+                else:
+                     word_count[temp] = 1      
+    return word_dict
 
 def print_words(filename):
-    """Prints one per line '<word> : <count>', sorted
+    """
+    Prints one per line '<word> : <count>', sorted
     by word for the given file.
     """
-    # Your code here
-    return
-
+    new_dictionary = create_word_dict(filename)
+    for each in sorted(new_dictionary):
+        print(each, ":", new_dictionary[each])
+    return new_dictionary
 
 def print_top(filename):
-    """Prints the top count listing for the given file."""
-    # Your code here
-    return
-
+    """
+    Prints the top count listing for the given file.
+    """
+    word_dictionary = create_word_dict(filename)
+    top_twenty = sorted(word_dictionary, key=lambda x: x[1], reverse=True)
+    for each in top_twenty:
+        print(each + ":" + str(word_dictionary[each]))
+    return top_twenty
 
 # This basic command line argument parsing code is provided and calls
 # the print_words() and print_top() functions which you must implement.
