@@ -43,7 +43,7 @@ def create_word_dict(filename):
                 if temp in word_dict:
                     word_dict[temp] += 1
                 else:
-                     word_count[temp] = 1      
+                     word_dict[temp] = 1      
     return word_dict
 
 def print_words(filename):
@@ -61,9 +61,11 @@ def print_top(filename):
     Prints the top count listing for the given file.
     """
     word_dictionary = create_word_dict(filename)
+    word_dictionary = word_dictionary.items()
     top_twenty = sorted(word_dictionary, key=lambda x: x[1], reverse=True)
-    for each in top_twenty:
-        print(each + ":" + str(word_dictionary[each]))
+    for each in top_twenty[0:20]:
+        print(str(each[0]) + ":" + str(each[1]))
+
     return top_twenty
 
 # This basic command line argument parsing code is provided and calls
